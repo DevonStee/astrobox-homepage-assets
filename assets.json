@@ -29,5 +29,11 @@
     "sha256": "982a6c5c0a55387467c311fbccb544bd36e92d448b2fce0c80db7d0c7f62d85d",
     "bytes": 4381,
     "source": "https://static.afdiancdn.com/static/img/icons/apple-touch-icon-152x152.png"
+  },
+  {
+    "file": "media/xiaohongshu-official-icon-180.png",
+    "sha256": "2912c4df1ab479d734ef132e9c45b4f17afa80b2aa3eaf4438acd54afc70b20a",
+    "bytes": 2482,
+    "source": "https://picasso-static.xiaohongshu.com/fe-platform/f43dc4a8baf03678996c62d8db6ebc01a82256ff.png"
   }
 ]

@@ -16,3 +16,5 @@ This is an asset hosting repository, not a published AstroBox watch-face resourc
 ## Official platform icons
 
 `media/afdian-official-icon.png` is the unchanged official Afdian icon referenced by [afdian.com](https://afdian.com/), downloaded from its official CDN. Used for the creator support button.
+
+`media/xiaohongshu-official-icon-180.png` is the unchanged 180 × 180 official Xiaohongshu apple-touch icon referenced by [xiaohongshu.com](https://www.xiaohongshu.com/). It replaces the 32px favicon in the homepage button.
