@@ -23,5 +23,11 @@
     "file": "media/profile-time-simply-20261020-v3.png",
     "sha256": "d4f940e23d822d1f324a9bfa0db17a4449fcbe1a19c82918d43eaf1dbd7fab43",
     "bytes": 39941
+  },
+  {
+    "file": "media/afdian-official-icon.png",
+    "sha256": "982a6c5c0a55387467c311fbccb544bd36e92d448b2fce0c80db7d0c7f62d85d",
+    "bytes": 4381,
+    "source": "https://static.afdiancdn.com/static/img/icons/apple-touch-icon-152x152.png"
   }
 ]

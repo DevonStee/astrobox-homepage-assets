@@ -12,3 +12,7 @@ This is an asset hosting repository, not a published AstroBox watch-face resourc
 - `media/profile-time-simply-20261020-v3.png` — “时间，简单就好” collection cover, TIME SIMPLY only, in a playful rounded font.
 
 `assets.json` records the SHA-256 digest and size of each file. AstroBox references the raw image URLs directly.
+
+## Official platform icons
+
+`media/afdian-official-icon.png` is the unchanged official Afdian icon referenced by [afdian.com](https://afdian.com/), downloaded from its official CDN. Used for the creator support button.
