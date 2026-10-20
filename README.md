@@ -9,6 +9,6 @@ This is an asset hosting repository, not a published AstroBox watch-face resourc
 - `media/profile-dual-showcase-20261019-v1.webp` — animated homepage showcase.
 - `media/profile-red-background-20261019-v1.png` — red homepage background.
 - `media/profile-boarding-pass-20261019-v1.png` — “拿好登机牌” collection cover.
-- `media/profile-simple-time-english-20261020-v2.png` — “时间，简单就好” collection cover, English typography only.
+- `media/profile-time-simply-20261020-v3.png` — “时间，简单就好” collection cover, TIME SIMPLY only, in a playful rounded font.
 
 `assets.json` records the SHA-256 digest and size of each file. AstroBox references the raw image URLs directly.
