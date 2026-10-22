@@ -35,5 +35,10 @@
     "sha256": "2912c4df1ab479d734ef132e9c45b4f17afa80b2aa3eaf4438acd54afc70b20a",
     "bytes": 2482,
     "source": "https://picasso-static.xiaohongshu.com/fe-platform/f43dc4a8baf03678996c62d8db6ebc01a82256ff.png"
+  },
+  {
+    "file": "media/profile-material-design-20261022-v1.png",
+    "sha256": "64bb31ee443f2798a4c08c6b402a38fcd185fb7782deb69ecef9201558adaea3",
+    "bytes": 1468754
   }
 ]
