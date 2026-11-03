@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "groups": {
+    "new": {
+      "title": "新品上架",
+      "pill": "NEW RELEASES",
+      "items": [
+        {
+          "id": "979896836797",
+          "name": "BOARDING PASS",
+          "line": "飞行系列五合一",
+          "stage": "#0f1424",
+          "still": true
+        },
+        {
+          "id": "979816979482",
+          "name": "PUFF CROWD",
+          "line": "软萌气球数字",
+          "stage": "#181e2e"
+        },
+        {
+          "id": "979849910571",
+          "name": "SPLIT SCRIPT",
+          "line": "数字与汉字交错",
+          "stage": "#14161a"
+        },
+        {
+          "id": "979856614572",
+          "name": "CAT COURT&设计师合作款",
+          "line": "手绘猫猫叠牌时钟",
+          "stage": "#18120e"
+        },
+        {
+          "id": "979809915926",
+          "name": "DICE CLOCK",
+          "line": "摇摇骰子看时间",
+          "stage": "#121214"
+        }
+      ]
+    },
+    "free": {
+      "title": "免费人气",
+      "items": [
+        {
+          "id": "979812217215",
+          "name": "DOT MATRIX",
+          "line": "点阵拼出时间，抬腕荡开水波。",
+          "stage": "#16181b"
+        },
+        {
+          "id": "979848633475",
+          "name": "Dot Ring",
+          "line": "白色断环，围住圆点时间。",
+          "stage": "#141415"
+        },
+        {
+          "id": "979898866988",
+          "name": "PEBBLE REELS",
+          "line": "四列数字带在红色窗口显示时间。",
+          "stage": "#1e1f22"
+        },
+        {
+          "id": "979845526110",
+          "name": "LIGHT SIGNATURE",
+          "line": "车灯光语表盘，尾灯与头灯。",
+          "stage": "#1a1212"
+        },
+        {
+          "id": "979886788161",
+          "name": "PASTEL BOLD",
+          "line": "四个数字槽各用一种粉彩色，数字互相叠压。",
+          "stage": "#1b1920"
+        }
+      ],
+      "heading": "Free, not bad, even better."
+    },
+    "paid": {
+      "title": "付费人气",
+      "items": [
+        {
+          "id": "979816747762",
+          "name": "TAROT ARCANA",
+          "line": "四张塔罗牌，翻出此刻时间。",
+          "stage": "#121a2c"
+        },
+        {
+          "id": "979842683750",
+          "name": "NIXIE TUBE",
+          "line": "点火、进位，让时间留下余辉。",
+          "stage": "#1e130d"
+        },
+        {
+          "id": "979807531249",
+          "name": "WINDOW SEAT",
+          "line": "屏幕是飞机舷窗，窗外按小时换景。",
+          "stage": "#242529"
+        },
+        {
+          "id": "979840213697",
+          "name": "LUME RADAR",
+          "line": "带余晖的扫描线是秒针，一分钟扫过整块屏幕。",
+          "stage": "#0c1610"
+        },
+        {
+          "id": "979894087442",
+          "name": "ASCII LEDGER",
+          "line": "等宽字符拼成大数字。",
+          "stage": "#1c150a"
+        }
+      ],
+      "heading": "Thx for the payment, so appreciate."
+    }
+  },
+  "lineSource": "前 4 款文案为 App 现有原文；新增 6 款摘自各自上架描述原文（manifest_v2.json），只统一了标点"
+}

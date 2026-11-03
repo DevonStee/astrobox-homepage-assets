@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>brin.</title>
+<style>
+  :root {
+    --ink: #1c1a17;
+    --muted: #8a8278;
+    --red: #e6322c;
+    /* Hero board content. The App wraps an iframe in its own element and its
+       HTML filter drops flex sizing, so the side-by-side layout lives here,
+       where real CSS and media queries work. Wide: intro tile | two films,
+       top and bottom aligned. Narrow: the films first, the intro below. */
+    --gap: 3vw;
+    color-scheme: light;
+  }
+  html, body { margin: 0; background: transparent; }
+  html { overflow: hidden; }
+  body {
+    font: 500 11px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .hero { display: grid; grid-template-columns: 37fr 63fr; gap: 1.3vw; align-items: stretch; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.3vw; align-items: start; }
+  .intro {
+    box-sizing: border-box; background: #f2eee6; border-radius: 14px; overflow: hidden;
+    padding: 2.3vw 2.4vw 2.2vw; display: flex; flex-direction: column; justify-content: space-between;
+    font-weight: 400;
+  }
+  .pill {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 7px;
+    border-radius: 999px; background: #e6dfd2; padding: 5px 11px 5px 9px;
+    font: 600 10px/1.3 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; letter-spacing: .13em; color: var(--ink);
+  }
+  .pill i { width: 6px; height: 6px; border-radius: 3px; background: var(--red); }
+  /* the profile avatar (original image, scaled copy), sitting in the middle
+     of the tile, left-aligned with the text; not a link, no motion */
+  .avatar {
+    display: block; width: clamp(84px, 14.5vw, 136px); height: auto; aspect-ratio: 1;
+    border-radius: 50%; object-fit: cover; background: #1c1a17;
+    box-shadow: 0 0 0 1px rgba(28, 26, 23, .08);
+  }
+  .tag { font-size: clamp(9px, 1vw, 10.5px); letter-spacing: .14em; color: var(--muted); margin: 0 0 .7em; }
+  .intro h1 { margin: 0; font-size: clamp(17px, 2.75vw, 30px); line-height: 1.32; font-weight: 700; letter-spacing: -.01em; }
+  .intro p { margin: .75em 0 0; font-size: clamp(12px, 1.45vw, 14px); line-height: 1.75; color: #4a443d; }
+  @media (max-width: 639px) {
+    .hero { grid-template-columns: 1fr; gap: 12px; }
+    .duo { order: -1; column-gap: 3vw; }
+    .intro { padding: 20px 20px 22px; gap: 16px; }
+    .avatar { width: 76px; }
+    .intro h1 { font-size: 23px; }
+    .intro p { font-size: 13.5px; }
+    .tag { font-size: 10px; }
+  }
+  .film { margin: 0; }
+  .frame {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 14px;
+    overflow: hidden;
+    background: transparent;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    isolation: isolate;
+  }
+  .frame video, .frame img {
+    position: absolute; top: -1px; left: -1px;
+    width: calc(100% + 2px); height: calc(100% + 2px);
+    object-fit: cover; display: block;
+  }
+  /* the name of the face on screen sits on the film as a small dark pill, so
+     the tile is self-contained (it reads the same on any board background) */
+  .now {
+    position: absolute; left: 8px; bottom: 8px; z-index: 2; max-width: calc(100% - 16px);
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 9px 5px 8px; border: 0; border-radius: 999px;
+    background: rgba(20, 18, 16, .58); color: #f2eee6;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    font: 600 10px/1.2 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+    letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; text-align: left;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .now span { overflow: hidden; text-overflow: ellipsis; transition: opacity .35s ease; }
+  .now i { width: 5px; height: 5px; border-radius: 3px; flex: none; background: currentColor; opacity: .5; }
+  .now[data-link] { cursor: pointer; }
+  .now[data-link] i { background: var(--red); opacity: 1; }
+  .now[data-link]::after { content: "↗"; opacity: .7; letter-spacing: 0; }
+  .now:not([data-link]) { pointer-events: none; }
+  .now.swap span { opacity: 0; }
+  @media (max-width: 420px) {
+    .frame { border-radius: 11px; }
+    .now { left: 6px; bottom: 6px; padding: 4px 8px 4px 7px; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+<main class="hero">
+  <section class="intro">
+    <div class="pill"><i></i>WATCHFACE STUDIO / 表盘创作</div>
+    <img class="avatar" src="media/brin-avatar-480.jpg" width="480" height="480" alt="Brin 的头像">
+    <div>
+      <div class="tag">SMALL SCREEN. BIG IDEAS.</div>
+      <h1>做表盘，<br>just奖励自己一下。</h1>
+      <p>我是 Brin。原创、复刻，也重新构建设计。<br>把喜欢的设计，戴在手腕上。</p>
+    </div>
+  </section>
+  <div class="duo">
+  <figure class="film a" style="margin:0">
+    <div class="frame">
+      <img src="media/duo-a.jpg" alt="" aria-hidden="true">
+      <video data-side="a" src="media/duo-a.mp4?v=1" muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="旧表盘亮屏、本轮圆、浮起来、印钞机"></video>
+      <button class="now" type="button" data-for="a"><i></i><span></span></button>
+    </div>
+  </figure>
+  <figure class="film b" style="margin-left:0;margin-right:0;margin-bottom:0">
+    <div class="frame">
+      <img src="media/duo-b.jpg" alt="" aria-hidden="true">
+      <video data-side="b" src="media/duo-b.mp4?v=1" muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="彩虹弹簧、MD 系列、猫猫卡牌、骰子"></video>
+      <button class="now" type="button" data-for="b"><i></i><span></span></button>
+    </div>
+  </figure>
+  </div>
+</main>
+<script>
+(() => {
+  // B starts 12.2 s in so the two loops' big transitions fall in each other's quiet stretches.
+  const OFFSET_B = 12.2;
+  const NAMES = {
+    "Ladder": ["Ladder", "979896386193"],
+    "Clock Grid": ["Clock Grid", "979882971084"],
+    "Dot Matrix": ["Dot Matrix", "979812217215"],
+    "Wire Terrain": ["Wire Terrain", null],
+    "Neon Ring": ["Neon Ring", null],
+    "epi": ["Epicycle Clock", null],
+    "puff": ["Puff Crowd", "979816979482"],
+    "ig": ["Intaglio Construction", null],
+    "slinky": ["Rainbow Slinky", "979884106337"],
+    "md": ["MD 系列", null],
+    "cat": ["Cat Court", "979856614572"],
+    "dice": ["Dice Clock", "979809915926"],
+  };
+  const NS = "astrobox.profile-iframe";
+  const send = (type, extra) => { try { parent.postMessage(Object.assign({ namespace: NS, version: 1, type }, extra), "*"); } catch (_) {} };
+
+  // ---- height sync with the AstroBox board (protocol v1)
+  let pending = false;
+  const report = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      const b = document.body;
+      const h = Math.ceil(Math.max(b.getBoundingClientRect().height, b.offsetHeight, b.scrollHeight));
+      send("resize", { height: h });
+    });
+  };
+  addEventListener("message", (e) => {
+    const m = e.data;
+    if (!m || m.namespace !== NS) return;
+    if (m.type === "config" && m.requestResize) report();
+    if (m.type === "open-resource-result" && m.requestId in waiting) {
+      if (m.accepted) clearTimeout(waiting[m.requestId]);
+      delete waiting[m.requestId];
+    }
+  });
+  new ResizeObserver(report).observe(document.body);
+  addEventListener("load", report);
+  send("ready", {});
+
+  // ---- work entries: open the face inside AstroBox
+  const waiting = {};
+  const openResource = (id) => {
+    const href = `https://astrobox.online/open?source=resv2&id=${id}&provider=OfficialV2&restype=watchface`;
+    const requestId = `r${Date.now()}${Math.random().toString(36).slice(2, 6)}`;
+    waiting[requestId] = setTimeout(() => { location.href = href; }, 500);  // older Apps
+    send("open-resource", { requestId, href });
+  };
+
+  // ---- films
+  const videos = [...document.querySelectorAll("video")];
+  const [va, vb] = videos;
+  const segs = {};
+  const cap = {};
+  document.querySelectorAll(".now").forEach((el) => {
+    cap[el.dataset.for] = el;
+    el.addEventListener("click", () => { if (el.dataset.link) openResource(el.dataset.link); });
+  });
+  const shown = { a: "", b: "" };
+  const label = (side, t) => {
+    const list = segs[side];
+    if (!list) return;
+    let key = list[list.length - 1][2];
+    for (const [s, e, k] of list) if (t >= s && t < e) { key = k; break; }
+    if (key === shown[side]) return;
+    const first = shown[side] === "";
+    shown[side] = key;
+    const [name, id] = NAMES[key] || [key, null];
+    const el = cap[side];
+    const apply = () => {
+      el.querySelector("span").textContent = name;
+      if (id) el.dataset.link = id; else delete el.dataset.link;
+      el.setAttribute("aria-label", id ? `在 AstroBox 打开 ${name}` : name);
+      el.disabled = !id;
+      el.classList.remove("swap");
+    };
+    if (first) apply(); else { el.classList.add("swap"); setTimeout(apply, 220); }
+  };
+  ["a", "b"].forEach((side) => {
+    fetch(`media/duo-${side}.json?v=1`).then((r) => r.json()).then((d) => {
+      segs[side] = d.segments;
+      const v = side === "a" ? va : vb;
+      label(side, v.currentTime || 0);
+    }).catch(() => {});
+  });
+  const watch = (v) => {
+    const side = v.dataset.side;
+    if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) {
+      let last = -1;
+      const cb = (_n, meta) => {
+        const s = Math.floor(meta.mediaTime * 4);
+        if (s !== last) { last = s; label(side, meta.mediaTime); }
+        v.requestVideoFrameCallback(cb);
+      };
+      v.requestVideoFrameCallback(cb);
+    } else {
+      v.addEventListener("timeupdate", () => label(side, v.currentTime));
+    }
+  };
+  videos.forEach(watch);
+
+  vb.addEventListener("loadedmetadata", () => { vb.currentTime = OFFSET_B % vb.duration; }, { once: true });
+  // keep B's phase if the two decoders drift (checked when A wraps around)
+  let lastA = 0;
+  va.addEventListener("timeupdate", () => {
+    if (va.currentTime < lastA && vb.duration) {
+      const want = (va.currentTime + OFFSET_B) % vb.duration;
+      if (Math.abs(vb.currentTime - want) > 0.3) vb.currentTime = want;
+    }
+    lastA = va.currentTime;
+  });
+
+  // play only while on screen and visible; honour reduced motion
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  let onScreen = true;
+  const sync = () => {
+    const run = onScreen && !document.hidden && !still.matches;
+    videos.forEach((v) => { if (run) v.play().catch(() => {}); else v.pause(); });
+  };
+  new IntersectionObserver((es) => { onScreen = es.some((e) => e.isIntersecting); sync(); }, { threshold: 0.05 })
+    .observe(document.querySelector(".duo"));
+  document.addEventListener("visibilitychange", sync);
+  still.addEventListener?.("change", sync);
+  videos.forEach((v) => v.addEventListener("canplay", sync, { once: true }));
+  addEventListener("pointerdown", sync, { once: true });
+})();
+</script>
+</body>
+</html>
