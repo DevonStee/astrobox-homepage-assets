@@ -109,17 +109,17 @@
   <div class="duo">
   <figure class="film a" style="margin:0">
     <div class="frame">
-      <img src="media/duo-a.jpg" alt="" aria-hidden="true">
-      <video data-side="a" src="media/duo-a.mp4?v=1" muted loop playsinline preload="auto" disablepictureinpicture
-             aria-label="旧表盘亮屏、本轮圆、浮起来、印钞机"></video>
+      <img src="media/duo-a.jpg?v=2" alt="" aria-hidden="true">
+      <video data-side="a" src="media/duo-a.mp4?v=2" muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="黑洞刻度、碎光锦鲤、唱针时刻"></video>
       <button class="now" type="button" data-for="a"><i></i><span></span></button>
     </div>
   </figure>
   <figure class="film b" style="margin-left:0;margin-right:0;margin-bottom:0">
     <div class="frame">
-      <img src="media/duo-b.jpg" alt="" aria-hidden="true">
-      <video data-side="b" src="media/duo-b.mp4?v=1" muted loop playsinline preload="auto" disablepictureinpicture
-             aria-label="彩虹弹簧、MD 系列、猫猫卡牌、骰子"></video>
+      <img src="media/duo-b.jpg?v=2" alt="" aria-hidden="true">
+      <video data-side="b" src="media/duo-b.mp4?v=2" muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="红色机器人、白色机器人、猫猫卡牌、骰子"></video>
       <button class="now" type="button" data-for="b"><i></i><span></span></button>
     </div>
   </figure>
@@ -127,19 +127,14 @@
 </main>
 <script>
 (() => {
-  // B starts 12.2 s in so the two loops' big transitions fall in each other's quiet stretches.
-  const OFFSET_B = 12.2;
+  // B starts 3.5 s in so the two loops' big transitions fall in each other's quiet stretches.
+  const OFFSET_B = 3.5;
   const NAMES = {
-    "Ladder": ["Ladder", "979896386193"],
-    "Clock Grid": ["Clock Grid", "979882971084"],
-    "Dot Matrix": ["Dot Matrix", "979812217215"],
-    "Wire Terrain": ["Wire Terrain", null],
-    "Neon Ring": ["Neon Ring", null],
-    "epi": ["Epicycle Clock", null],
-    "puff": ["Puff Crowd", "979816979482"],
-    "ig": ["Intaglio Construction", null],
-    "slinky": ["Rainbow Slinky", "979884106337"],
-    "md": ["MD 系列", null],
+    "zoom": ["Zoom Dial Singularity", "979849880415"],
+    "koi": ["Koi Halo", "979864763804"],
+    "vinyl": ["Vinyl Cut", "979815191696"],
+    "crimson": ["Crimson Visor", "979867498017"],
+    "tricolor": ["Tricolor Frame", "979832242055"],
     "cat": ["Cat Court", "979856614572"],
     "dice": ["Dice Clock", "979809915926"],
   };
@@ -210,7 +205,7 @@
     if (first) apply(); else { el.classList.add("swap"); setTimeout(apply, 220); }
   };
   ["a", "b"].forEach((side) => {
-    fetch(`media/duo-${side}.json?v=1`).then((r) => r.json()).then((d) => {
+    fetch(`media/duo-${side}.json?v=2`).then((r) => r.json()).then((d) => {
       segs[side] = d.segments;
       const v = side === "a" ? va : vb;
       label(side, v.currentTime || 0);
