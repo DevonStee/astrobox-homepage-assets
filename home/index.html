@@ -109,17 +109,17 @@
   <div class="duo">
   <figure class="film a" style="margin:0">
     <div class="frame">
-      <img src="media/duo-a.jpg?v=3" alt="" aria-hidden="true">
-      <video data-side="a" src="media/duo-a.mp4?v=3" muted loop playsinline preload="auto" disablepictureinpicture
+      <img src="media/duo-a.jpg?v=4" alt="" aria-hidden="true">
+      <video data-side="a" src="media/duo-a.mp4?v=4" muted loop playsinline preload="auto" disablepictureinpicture
              aria-label="黑洞刻度、碎光锦鲤、唱针时刻"></video>
       <button class="now" type="button" data-for="a"><i></i><span></span></button>
     </div>
   </figure>
   <figure class="film b" style="margin-left:0;margin-right:0;margin-bottom:0">
     <div class="frame">
-      <img src="media/duo-b.jpg?v=3" alt="" aria-hidden="true">
-      <video data-side="b" src="media/duo-b.mp4?v=3" muted loop playsinline preload="auto" disablepictureinpicture
-             aria-label="红色机器人、白色机器人、猫猫卡牌、骰子"></video>
+      <img src="media/duo-b.jpg?v=4" alt="" aria-hidden="true">
+      <video data-side="b" src="media/duo-b.mp4?v=4" muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="红色机器人、白色机器人、猫猫卡牌"></video>
       <button class="now" type="button" data-for="b"><i></i><span></span></button>
     </div>
   </figure>
@@ -127,8 +127,8 @@
 </main>
 <script>
 (() => {
-  // B starts 3.5 s in so the two loops' big transitions fall in each other's quiet stretches.
-  const OFFSET_B = 3.5;
+  // B starts 7.2 s in so the two loops' big transitions fall in each other's quiet stretches.
+  const OFFSET_B = 7.2;
   const NAMES = {
     "zoom": ["Zoom Dial Singularity", "979849880415"],
     "koi": ["Koi Halo", "979864763804"],
@@ -136,7 +136,6 @@
     "crimson": ["Crimson Visor", "979867498017"],
     "tricolor": ["Tricolor Frame", "979832242055"],
     "cat": ["Cat Court", "979856614572"],
-    "dice": ["Dice Clock", "979809915926"],
   };
   const NS = "astrobox.profile-iframe";
   const send = (type, extra) => { try { parent.postMessage(Object.assign({ namespace: NS, version: 1, type }, extra), "*"); } catch (_) {} };
@@ -205,7 +204,7 @@
     if (first) apply(); else { el.classList.add("swap"); setTimeout(apply, 220); }
   };
   ["a", "b"].forEach((side) => {
-    fetch(`media/duo-${side}.json?v=3`).then((r) => r.json()).then((d) => {
+    fetch(`media/duo-${side}.json?v=4`).then((r) => r.json()).then((d) => {
       segs[side] = d.segments;
       const v = side === "a" ? va : vb;
       label(side, v.currentTime || 0);
